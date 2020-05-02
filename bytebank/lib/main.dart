@@ -13,9 +13,16 @@ class BytebankApp extends StatelessWidget {
   }
 }
 
-class ListaTransferencia extends StatelessWidget {
+class ListaTransferencia extends StatefulWidget {
   final List<Transferencia> _transferencias = List();
 
+  @override
+  State<StatefulWidget> createState() {
+    return _ListaTransferenciaState();
+  }
+}
+
+class _ListaTransferenciaState extends State<ListaTransferencia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,20 +30,23 @@ class ListaTransferencia extends StatelessWidget {
         title: Text('Transferências'),
       ),
       body: ListView.builder(
-        itemCount: _transferencias.length,
+        itemCount: widget._transferencias.length,
         itemBuilder: (context, indice) {
-          return ItemTransferencia(_transferencias[indice]);
+          return ItemTransferencia(widget._transferencias[indice]);
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
           final Future<Transferencia> future = Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => (FormularioTransferencia())));
+            context,
+            MaterialPageRoute(
+              builder: (context) => (FormularioTransferencia()),
+            ),
+          );
           future.then((transferenciaRecebida) {
-            _transferencias.add(transferenciaRecebida);
+            if (transferenciaRecebida != null)
+              widget._transferencias.add(transferenciaRecebida);
           });
         },
       ),
