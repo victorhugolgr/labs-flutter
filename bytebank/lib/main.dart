@@ -6,10 +6,13 @@ class BytebankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: ListaTransferencia(),
-      ),
-    );
+        theme: ThemeData(
+            primaryColor: Colors.orange[700],
+            accentColor: Colors.orangeAccent[100],
+            buttonTheme: ButtonThemeData(
+                buttonColor: Colors.orangeAccent[100],
+                textTheme: ButtonTextTheme.primary)),
+        home: ListaTransferencia());
   }
 }
 
@@ -45,11 +48,9 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
             ),
           );
           future.then((transferenciaRecebida) {
-            Future.delayed(Duration(seconds: 5), () {
-              setState(() {
+            setState(() {
               if (transferenciaRecebida != null)
                 widget._transferencias.add(transferenciaRecebida);
-              });
             });
           });
         },
