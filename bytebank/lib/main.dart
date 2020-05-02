@@ -45,8 +45,12 @@ class _ListaTransferenciaState extends State<ListaTransferencia> {
             ),
           );
           future.then((transferenciaRecebida) {
-            if (transferenciaRecebida != null)
-              widget._transferencias.add(transferenciaRecebida);
+            Future.delayed(Duration(seconds: 5), () {
+              setState(() {
+              if (transferenciaRecebida != null)
+                widget._transferencias.add(transferenciaRecebida);
+              });
+            });
           });
         },
       ),
@@ -78,39 +82,49 @@ class Transferencia {
   Transferencia(this.valor, this.numeroConta);
 }
 
-class FormularioTransferencia extends StatelessWidget {
+class FormularioTransferencia extends StatefulWidget {
   final TextEditingController _controladorCampoNumeroConta =
       TextEditingController();
+
   final TextEditingController _controladorCampoValor = TextEditingController();
 
+  @override
+  State<StatefulWidget> createState() {
+    return _FormularioTransferenciaState();
+  }
+}
+
+class _FormularioTransferenciaState extends State<FormularioTransferencia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Criando Transferênca')),
-      body: Column(
-        children: <Widget>[
-          Editor(
-            controlador: _controladorCampoNumeroConta,
-            rotulo: 'Número Conta',
-            dica: '000',
-          ),
-          Editor(
-              controlador: _controladorCampoValor,
-              rotulo: 'Valor',
-              dica: '0.00',
-              icone: Icons.monetization_on),
-          RaisedButton(
-            onPressed: () => _criaTransferencia(context),
-            child: Text('Confirmar'),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Editor(
+              controlador: widget._controladorCampoNumeroConta,
+              rotulo: 'Número Conta',
+              dica: '000',
+            ),
+            Editor(
+                controlador: widget._controladorCampoValor,
+                rotulo: 'Valor',
+                dica: '0.00',
+                icone: Icons.monetization_on),
+            RaisedButton(
+              onPressed: () => _criaTransferencia(context),
+              child: Text('Confirmar'),
+            )
+          ],
+        ),
       ),
     );
   }
 
   void _criaTransferencia(BuildContext context) {
-    final int conta = int.tryParse(_controladorCampoNumeroConta.text);
-    final double valor = double.tryParse(_controladorCampoValor.text);
+    final int conta = int.tryParse(widget._controladorCampoNumeroConta.text);
+    final double valor = double.tryParse(widget._controladorCampoValor.text);
 
     if (conta != null && valor != null) {
       final transferencia = Transferencia(valor, conta);
