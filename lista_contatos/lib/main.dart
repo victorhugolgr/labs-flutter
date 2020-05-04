@@ -59,7 +59,7 @@ class Dashboard extends StatelessWidget {
             )
           ],
         ),
-      ),,
+      ),
     );
   }
 }
