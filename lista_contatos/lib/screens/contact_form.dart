@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lista_contatos/models/contact.dart';
+import 'package:lista_contatos/models/contato.dart';
 
 class ContactForm extends StatefulWidget {
   const ContactForm({Key key}) : super(key: key);
@@ -51,7 +51,7 @@ class _ContactFormState extends State<ContactForm> {
                     final String telefone = _telefoneController.text;
                     final String email = _emailController.text;
 
-                    final novoContato = Contact(name, telefone, email);
+                    final novoContato = Contato(1, name, telefone, email);
                     Navigator.pop(context, novoContato);
                   },
                 ),
