@@ -40,10 +40,10 @@ class Dashboard extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                       shape: StadiumBorder(),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ContactList()));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => ContactList()),
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
