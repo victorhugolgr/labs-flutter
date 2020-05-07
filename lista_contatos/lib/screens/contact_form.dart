@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lista_contatos/database/app_database.dart';
 import 'package:lista_contatos/models/contato.dart';
 
 class ContactForm extends StatefulWidget {
@@ -52,7 +53,7 @@ class _ContactFormState extends State<ContactForm> {
                     final String email = _emailController.text;
 
                     final novoContato = Contato(1, name, telefone, email);
-                    Navigator.pop(context, novoContato);
+                    save(novoContato).then((id) => Navigator.pop(context));
                   },
                 ),
               ),
