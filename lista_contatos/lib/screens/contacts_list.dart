@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:lista_contatos/database/app_database.dart';
+import 'package:lista_contatos/dao/contato_dao.dart';
 import 'package:lista_contatos/models/contato.dart';
 import 'package:lista_contatos/screens/contact_form.dart';
 
-class ContactList extends StatelessWidget {
+class ContactList extends StatefulWidget {
+
+  @override
+  _ContactListState createState() => _ContactListState();
+}
+
+class _ContactListState extends State<ContactList> {
+  final ContatoDao _dao = ContatoDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,8 +20,8 @@ class ContactList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contato>>(
         initialData: List(),
-        future: findAll(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        future: _dao.findAll(),
+        builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               break;

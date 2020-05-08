@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lista_contatos/database/app_database.dart';
+import 'package:lista_contatos/dao/contato_dao.dart';
 import 'package:lista_contatos/models/contato.dart';
 
 class ContactForm extends StatefulWidget {
@@ -15,6 +15,8 @@ class _ContactFormState extends State<ContactForm> {
     final TextEditingController _nomeController = TextEditingController();
     final TextEditingController _telefoneController = TextEditingController();
     final TextEditingController _emailController = TextEditingController();
+
+    final ContatoDao _dao = ContatoDao();
 
     return Scaffold(
       appBar: AppBar(
@@ -52,8 +54,10 @@ class _ContactFormState extends State<ContactForm> {
                     final String telefone = _telefoneController.text;
                     final String email = _emailController.text;
 
-                    final novoContato = Contato(1, name, telefone, email);
-                    save(novoContato).then((id) => Navigator.pop(context));
+                    final novoContato = Contato(null, name, telefone, email);
+                    _dao.save(novoContato).then((id) {
+                      Navigator.pop(context);
+                      });
                   },
                 ),
               ),
