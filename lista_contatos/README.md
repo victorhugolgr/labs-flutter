@@ -9,7 +9,6 @@ Este aplicativo tem como objetivo salvar listas de contatos.
 - Flutter
 - Sqlite
 - GoogleMaps
-- 
 
 ## Funcionalidades
 
