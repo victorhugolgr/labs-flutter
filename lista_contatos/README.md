@@ -1,16 +1,25 @@
-# lista_contatos
+# Aplicativo de lista de contatos
 
-A new Flutter project.
+<div style="text-align:center"><img src="images/demostrativo_app.gif" /></div>
 
-## Getting Started
+Este aplicativo tem como objetivo salvar listas de contatos.
 
-This project is a starting point for a Flutter application.
+## Tecnologias
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter
+- Sqlite
+- GoogleMaps
+- 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Funcionalidades
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* :heavy_check_mark: Listar usuários;
+* :heavy_check_mark: Salvar usuários;
+  - Nome
+  - Telefone
+  - Email 
+*  :heavy_multiplication_x: Editar usuários;
+*  :heavy_multiplication_x: Detalhar usuários;
+*  :heavy_multiplication_x: Excluir usuários;
+*  :heavy_multiplication_x: Salvar imagem do usuário;
+*  :heavy_multiplication_x: Salvar endereço via googlemaps;
