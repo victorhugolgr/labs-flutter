@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lista_contatos/screens/contato_form.dart';
+import 'package:lista_contatos/screens/contato_list.dart';
 import 'package:lista_contatos/screens/dashboard.dart';
 
 void main() => runApp(ListaContatosApp());
@@ -8,10 +10,15 @@ class ListaContatosApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Dashboard(),
+        '/list': (context) => ContatoList(),
+        '/edit': (context) => ContatoForm(),
+      },
       theme: ThemeData(
         accentColor: Colors.yellowAccent[700],
       ),
-      home: Dashboard(),
     );
   }
 }

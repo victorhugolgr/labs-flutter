@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lista_contatos/screens/contacts_list.dart';
+import 'package:lista_contatos/screens/contato_list.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key key}) : super(key: key);
@@ -40,10 +40,7 @@ class Dashboard extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                       shape: StadiumBorder(),
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => ContactList()),
-                        );
+                        Navigator.pushNamed(context, '/list');
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

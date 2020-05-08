@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lista_contatos/dao/contato_dao.dart';
 import 'package:lista_contatos/models/contato.dart';
-import 'package:lista_contatos/screens/contact_form.dart';
 
-class ContactList extends StatefulWidget {
-
+class ContatoList extends StatefulWidget {
   @override
-  _ContactListState createState() => _ContactListState();
+  _ContatoListState createState() => _ContatoListState();
 }
 
-class _ContactListState extends State<ContactList> {
+class _ContatoListState extends State<ContatoList> {
   final ContatoDao _dao = ContatoDao();
 
   @override
@@ -56,12 +54,7 @@ class _ContactListState extends State<ContactList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ContactForm(),
-            ),
-          );
+          Navigator.pushNamed(context, '/edit');
         },
         child: Icon(Icons.add),
       ),

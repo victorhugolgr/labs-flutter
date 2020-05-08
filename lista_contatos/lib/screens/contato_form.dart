@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:lista_contatos/dao/contato_dao.dart';
 import 'package:lista_contatos/models/contato.dart';
 
-class ContactForm extends StatefulWidget {
-  const ContactForm({Key key}) : super(key: key);
+class ContatoForm extends StatefulWidget {
+  const ContatoForm({Key key}) : super(key: key);
 
   @override
-  _ContactFormState createState() => _ContactFormState();
+  _ContatoFormState createState() => _ContatoFormState();
 }
 
-class _ContactFormState extends State<ContactForm> {
+class _ContatoFormState extends State<ContatoForm> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController _nomeController = TextEditingController();
