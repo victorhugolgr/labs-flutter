@@ -69,7 +69,7 @@ class _ContatoItem extends StatelessWidget {
         ),
       ),
       onTap: () =>
-          Navigator.pushNamed(context, '/edit', arguments: <String, int>{'id': contato.id}),
+          Navigator.pushNamed(context, '/detail', arguments: <String, int>{'id': contato.id}),
     );
   }
 }
