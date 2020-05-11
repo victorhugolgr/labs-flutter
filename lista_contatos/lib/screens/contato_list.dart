@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lista_contatos/dao/contato_dao.dart';
 import 'package:lista_contatos/models/contato.dart';
+import 'package:lista_contatos/widget/loading.dart';
 
 class ContatoList extends StatefulWidget {
   @override
@@ -24,16 +25,7 @@ class _ContatoListState extends State<ContatoList> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text('Carregando...')
-                  ],
-                ),
-              );
+              return Loading();
               break;
             case ConnectionState.active:
               break;
@@ -69,11 +61,15 @@ class _ContatoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(contato.nome),
-        subtitle: Text(contato.telefone),
+    return GestureDetector(
+      child: Card(
+        child: ListTile(
+          title: Text(contato.nome),
+          subtitle: Text(contato.telefone),
+        ),
       ),
+      onTap: () =>
+          Navigator.pushNamed(context, '/edit', arguments: <String, int>{'id': contato.id}),
     );
   }
 }

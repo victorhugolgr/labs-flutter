@@ -24,6 +24,23 @@ class ContatoDao {
   Future<List<Contato>> findAll() async {
     final Database db = await getDatabase();
     final List<Map<String, dynamic>> result = await db.query(_TABLE_NAME);
-    return result.isNotEmpty ? result.map((item) => Contato.fromMap(item)).toList() : [];
+    return result.isNotEmpty
+        ? result.map((item) => Contato.fromMap(item)).toList()
+        : [];
+  }
+
+  Future<Contato> findOne(int idContato) async {
+    final Database db = await getDatabase();
+    List<Map> maps =
+        await db.query(_TABLE_NAME, where: '$_id = ?', whereArgs: [idContato]);
+    if (maps.length > 0) {
+      return Contato.fromMap(maps.first);
+    }
+    return null;
+  }
+
+  Future<int> update(Contato contato) async {
+    final Database db = await getDatabase();
+    return db.update(_TABLE_NAME, contato.toMap(),where: '$_id = ?', whereArgs: [contato.id]);
   }
 }
