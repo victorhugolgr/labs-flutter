@@ -17,7 +17,7 @@ Este aplicativo tem como objetivo salvar listas de contatos.
   - Nome
   - Telefone
   - Email 
-*  :heavy_multiplication_x: Editar usuários;
+*  :heavy_check_mark: Editar usuários;
 *  :heavy_multiplication_x: Detalhar usuários;
 *  :heavy_multiplication_x: Excluir usuários;
 *  :heavy_multiplication_x: Salvar imagem do usuário;
