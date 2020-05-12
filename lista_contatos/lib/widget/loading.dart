@@ -10,7 +10,6 @@ class Loading extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CircularProgressIndicator(),
-            Text('Carregando...'),
           ],
         ),
       ),

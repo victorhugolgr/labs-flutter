@@ -1,22 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:lista_contatos/dao/contato_dao.dart';
 import 'package:lista_contatos/models/contato.dart';
+import 'package:lista_contatos/widget/loading.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ContatoDetail extends StatelessWidget {
+class ContatoDetail extends StatefulWidget {
   const ContatoDetail({Key key}) : super(key: key);
 
   @override
+  _ContatoDetailState createState() => _ContatoDetailState();
+}
+
+class _ContatoDetailState extends State<ContatoDetail> {
+  @override
   Widget build(BuildContext context) {
+    final ContatoDao _dao = ContatoDao();
+
+    final Map<String, int> args = ModalRoute.of(context).settings.arguments;
+
+    final int idContato = args != null ? args['id'] : null;
+
     final Contato contato =
         Contato(1, 'Batman', '(91) 3255-4460', 'victor@hugo.com');
 
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          _topContent(contato, context),
-          _buttonContent(contato, context),
-          _bottomContent(contato, context),
-        ],
-      ),
+    return FutureBuilder(
+      future: _dao.findOne(idContato),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            break;
+          case ConnectionState.waiting:
+            return Loading();
+            break;
+          case ConnectionState.active:
+            // TODO: Handle this case.
+            break;
+          case ConnectionState.done:
+            return Scaffold(
+              body: Column(
+                children: <Widget>[
+                  _topContent(snapshot.data, context),
+                  _buttonContent(snapshot.data, context),
+                  _bottomContent(snapshot.data, context),
+                ],
+              ),
+            );
+            break;
+        }
+
+        return Text("Algum erro aconteceu");
+      },
     );
   }
 
@@ -77,54 +110,10 @@ class ContatoDetail extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.favorite,
-                    color: Colors.blue,
-                  ),
-                  Text(
-                    'Favorito',
-                    style: TextStyle(color: Colors.blue, fontSize: 12.0),
-                  )
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.phone,
-                    color: Colors.blue,
-                  ),
-                  Text(
-                    'Ligar',
-                    style: TextStyle(color: Colors.blue, fontSize: 12.0),
-                  )
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.edit,
-                    color: Colors.blue,
-                  ),
-                  Text(
-                    'Editar',
-                    style: TextStyle(color: Colors.blue, fontSize: 12.0),
-                  )
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.delete,
-                    color: Colors.blue,
-                  ),
-                  Text(
-                    'Excluir',
-                    style: TextStyle(color: Colors.blue, fontSize: 12.0),
-                  )
-                ],
-              )
+              _iconButton('Favoritar', Icons.favorite, () {}, context),
+              _iconButton("Editar", Icons.edit,
+                  () => Navigator.pushNamed(context, '/edit'), context),
+              _iconButton('Excluir', Icons.delete, () {}, context),
             ],
           ),
         ),
@@ -143,15 +132,62 @@ class ContatoDetail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Icon(Icons.phone, color: Colors.grey[700], ),
-              SizedBox(width: 16.0,),
-              Text(
-                contato.telefone,
-                style: TextStyle(fontSize: 18.0),
+          InkWell(
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.phone,
+                  color: Colors.grey[700],
+                ),
+                SizedBox(
+                  width: 16.0,
+                ),
+                Text(
+                  contato.telefone,
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              ],
+            ),
+            onTap: () => launch("tel://${contato.telefone}"),
+          ),
+          SizedBox(
+            height: 16.0,
+          ),
+          InkWell(
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.email,
+                    color: Colors.grey[700],
+                  ),
+                  SizedBox(
+                    width: 16.0,
+                  ),
+                  Text(
+                    contato.email,
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                ],
               ),
-            ],
+              onTap: () => launch("mailto:${contato.email}"))
+        ],
+      ),
+    );
+  }
+
+  Widget _iconButton(
+      String texto, IconData icone, Function acao, BuildContext context) {
+    return GestureDetector(
+      onTap: () => acao(),
+      child: Column(
+        children: <Widget>[
+          Icon(
+            icone,
+            color: Colors.blue,
+          ),
+          Text(
+            texto,
+            style: TextStyle(color: Colors.blue, fontSize: 12.0),
           )
         ],
       ),
