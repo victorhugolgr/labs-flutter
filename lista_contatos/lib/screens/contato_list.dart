@@ -66,10 +66,16 @@ class _ContatoItem extends StatelessWidget {
         child: ListTile(
           title: Text(contato.nome),
           subtitle: Text(contato.telefone),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: CircleAvatar(
+              backgroundImage: AssetImage("images/batman_profile.png"),
+            ),
+          ),
         ),
       ),
-      onTap: () =>
-          Navigator.pushNamed(context, '/detail', arguments: <String, int>{'id': contato.id}),
+      onTap: () => Navigator.pushNamed(context, '/detail',
+          arguments: <String, int>{'id': contato.id}),
     );
   }
 }
