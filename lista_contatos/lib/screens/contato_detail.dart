@@ -20,9 +20,6 @@ class _ContatoDetailState extends State<ContatoDetail> {
 
     final int idContato = args != null ? args['id'] : null;
 
-    final Contato contato =
-        Contato(1, 'Batman', '(91) 3255-4460', 'victor@hugo.com');
-
     return FutureBuilder(
       future: _dao.findOne(idContato),
       builder: (context, snapshot) {
