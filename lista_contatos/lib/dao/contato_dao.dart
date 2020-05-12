@@ -43,4 +43,9 @@ class ContatoDao {
     final Database db = await getDatabase();
     return db.update(_TABLE_NAME, contato.toMap(),where: '$_id = ?', whereArgs: [contato.id]);
   }
+
+  Future<int> delete(int id) async {
+    final Database db = await getDatabase();
+    return await db.delete(_TABLE_NAME, where: '$_id = ?', whereArgs: [id]);
+  }
 }

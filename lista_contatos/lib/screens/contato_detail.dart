@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lista_contatos/dao/contato_dao.dart';
 import 'package:lista_contatos/models/contato.dart';
+import 'package:lista_contatos/widget/confirm_dialog.dart';
 import 'package:lista_contatos/widget/loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -100,6 +101,7 @@ class _ContatoDetailState extends State<ContatoDetail> {
   }
 
   Widget _buttonContent(Contato contato, BuildContext context) {
+    final ContatoDao _dao = ContatoDao();
     return Column(
       children: <Widget>[
         Padding(
@@ -114,7 +116,20 @@ class _ContatoDetailState extends State<ContatoDetail> {
                   () => Navigator.pushNamed(context, '/edit',
                       arguments: {'id': contato.id}),
                   context),
-              _iconButton('Excluir', Icons.delete, () {}, context),
+              _iconButton('Excluir', Icons.delete, () {
+                return showDialog(
+                    context: context,
+                    builder: (context) {
+                      return ConfirmDialog(
+                        texto: 'Deseja excluir o contato ${contato.nome}?',
+                        sim: () async {
+                          await _dao.delete(contato.id);
+                          Navigator.of(context).pushReplacementNamed('/list');
+                        },
+                        nao: () => Navigator.of(context).pop(),
+                      );
+                    });
+              }, context),
             ],
           ),
         ),
