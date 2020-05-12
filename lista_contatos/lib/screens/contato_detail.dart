@@ -73,9 +73,9 @@ class _ContatoDetailState extends State<ContatoDetail> {
         Container(
           padding: EdgeInsets.only(left: 10.0),
           height: MediaQuery.of(context).size.height * 0.5,
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage("images/batman_profile.png"),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/batman_profile.png"),
               fit: BoxFit.cover,
             ),
           ),
@@ -111,8 +111,12 @@ class _ContatoDetailState extends State<ContatoDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               _iconButton('Favoritar', Icons.favorite, () {}, context),
-              _iconButton("Editar", Icons.edit,
-                  () => Navigator.pushNamed(context, '/edit'), context),
+              _iconButton(
+                  "Editar",
+                  Icons.edit,
+                  () => Navigator.pushNamed(context, '/edit',
+                      arguments: {'id': contato.id}),
+                  context),
               _iconButton('Excluir', Icons.delete, () {}, context),
             ],
           ),
