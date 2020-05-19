@@ -21,29 +21,34 @@ class _ContatoDetailState extends State<ContatoDetail> {
 
     final int idContato = args != null ? args['id'] : null;
 
+    if (idContato == null) Navigator.popAndPushNamed(context, '/list');
+
     return FutureBuilder(
       future: _dao.findOne(idContato),
       builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            break;
-          case ConnectionState.waiting:
-            return Loading();
-            break;
-          case ConnectionState.active:
-            // TODO: Handle this case.
-            break;
-          case ConnectionState.done:
-            return Scaffold(
-              body: Column(
-                children: <Widget>[
-                  _topContent(snapshot.data, context),
-                  _buttonContent(snapshot.data, context),
-                  _bottomContent(snapshot.data, context),
-                ],
-              ),
-            );
-            break;
+        if (snapshot?.data != null) {
+          final Contato contato = snapshot?.data;
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Loading();
+              break;
+            case ConnectionState.active:
+              // TODO: Handle this case.
+              break;
+            case ConnectionState.done:
+              return Scaffold(
+                body: Column(
+                  children: <Widget>[
+                    _topContent(contato, context),
+                    _buttonContent(contato, context),
+                    _bottomContent(contato, context),
+                  ],
+                ),
+              );
+              break;
+          }
         }
 
         return Text("Algum erro aconteceu");
@@ -60,7 +65,7 @@ class _ContatoDetailState extends State<ContatoDetail> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
-          contato.nome,
+          contato?.nome,
           style: TextStyle(color: Colors.white, fontSize: 45.0),
         ),
       ],
@@ -123,8 +128,10 @@ class _ContatoDetailState extends State<ContatoDetail> {
                       return ConfirmDialog(
                         texto: 'Deseja excluir o contato ${contato.nome}?',
                         sim: () async {
-                          await _dao.delete(contato.id);
+                          final idDeletado = await _dao.delete(contato.id);
+                          debugPrint(idDeletado.toString());
                           Navigator.of(context).pushReplacementNamed('/list');
+                          dispose();
                         },
                         nao: () => Navigator.of(context).pop(),
                       );
