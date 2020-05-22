@@ -17,7 +17,10 @@ abstract class _ContatoControllerBase with Store {
   @computed
   int get itemsTotal => contatos.length;
 
-  _ContatoControllerBase({@required this.contatoService});
+  _ContatoControllerBase({@required this.contatoService}) {
+    debugPrint("");
+    initList();
+  }
 
   @action
   initList() async {
