@@ -1,0 +1,4 @@
+lib/app/modules/contato/pages/edit/contato_edit/contato_edit_page.dart
+test/app/modules/contato/pages/edit/contato_edit/contato_edit_page_test.dart
+lib/app/modules/contato/pages/edit/contato_edit/contato_edit_controller.dart
+test/app/modules/contato/pages/edit/contato_edit/contato_edit_controller_test.dart

@@ -21,7 +21,7 @@ class DatabaseHelper {
     try {
       String path = join(
           await getDatabasesPath(), DatabaseHelperEnum.getValue(DATABASE.name));
-      await deleteDatabase(path);
+      //await deleteDatabase(path);
       return await openDatabase(path,
           version: DatabaseHelperEnum.getValue(DATABASE.version),
           onCreate: _onCreate,
@@ -39,7 +39,6 @@ class DatabaseHelper {
   // Código SQL para criar o banco de dados e a tabela
   static Future _onCreate(Database db, int version) async {
     var sql = [
-      '''DROP TABLE IF EXISTS contato;''',
       '''CREATE TABLE IF NOT EXISTS contato (
         id integer primary key autoincrement,
         nome text,
@@ -47,9 +46,6 @@ class DatabaseHelper {
         email text,
         imagemPath text
       );''',
-      ''' INSERT INTO contato (nome, telefone, email) values ('Batman', '333222111', 'batman@dc.com');''',
-      ''' INSERT INTO contato (nome, telefone, email) values ('Superman', '111222333', 'superman@dc.com');''',
-      ''' INSERT INTO contato (nome, telefone, email) values ('Flash', '2221133333', 'flash@dc.com');''',
     ];
 
     for (var i = 0; i < sql.length; i++) {

@@ -13,9 +13,6 @@ class ContatoPage extends StatefulWidget {
 }
 
 class _ContatoPageState extends ModularState<ContatoPage, ContatoController> {
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,9 @@ class _ContatoPageState extends ModularState<ContatoPage, ContatoController> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Modular.link.pushNamed('/edit');
+        },
       ),
       body: Observer(builder: (_) {
         return ListView.builder(
