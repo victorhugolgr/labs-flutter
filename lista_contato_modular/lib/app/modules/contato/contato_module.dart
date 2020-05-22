@@ -23,7 +23,8 @@ class ContatoModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, child: (_, args) => ContatoPage()),
-        Router("/edit", child: (_, args) => ContatoEditPage())
+        Router("/edit/:id", child: (_, args) => ContatoEditPage(id:args.params['id'])),
+        Router("/edit", child: (_, args) => ContatoEditPage()),
       ];
 
   static Inject get to => Inject<ContatoModule>.of();

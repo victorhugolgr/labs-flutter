@@ -32,7 +32,7 @@ class _ContatoPageState extends ModularState<ContatoPage, ContatoController> {
           itemBuilder: (_, index) {
             return ItemWidget(
               model: controller.contatos[index],
-              onPressed: ()=>print("Pressionado!!!"),
+              onPressed: ()=>Modular.link.pushNamed('/edit/' + controller.contatos[index].id.toString()),
             );
           },
         );
