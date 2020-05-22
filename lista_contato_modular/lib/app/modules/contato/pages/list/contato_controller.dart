@@ -18,15 +18,12 @@ abstract class _ContatoControllerBase with Store {
   int get itemsTotal => contatos.length;
 
   _ContatoControllerBase({@required this.contatoService}) {
-    debugPrint("");
-    initList();
+    loadList();
   }
 
   @action
-  initList() async {
+  loadList() async {
     List<ContatoModel> list = await contatoService.queryAllRows();
-    debugPrint("Init List");
-    debugPrint("Size list " + list.length.toString());
     contatos.addAll(list);
   }
 

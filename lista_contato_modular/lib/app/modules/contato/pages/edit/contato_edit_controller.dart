@@ -19,14 +19,12 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
   _ContatoEditControllerBase({@required this.contatoService});
 
   salvar() async {
-    debugPrint("Salvando!");
-    final inserts = await this._insert(ContatoModel(
+    await this._insert(ContatoModel(
       nome: modelView.nome,
       telefone: modelView.telefone,
       email: modelView.email,
     ));
-    debugPrint("====================>" + inserts.toString());
-    Modular.link.pop();
+    Modular.link.pushNamedAndRemoveUntil("/", (route)=> false);
   }
 
   _insert(ContatoModel contato) async {

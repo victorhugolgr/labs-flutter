@@ -32,11 +32,11 @@ mixin _$ContatoController on _ContatoControllerBase, Store {
     });
   }
 
-  final _$initListAsyncAction = AsyncAction('_ContatoControllerBase.initList');
+  final _$loadListAsyncAction = AsyncAction('_ContatoControllerBase.loadList');
 
   @override
-  Future initList() {
-    return _$initListAsyncAction.run(() => super.initList());
+  Future loadList() {
+    return _$loadListAsyncAction.run(() => super.loadList());
   }
 
   @override
