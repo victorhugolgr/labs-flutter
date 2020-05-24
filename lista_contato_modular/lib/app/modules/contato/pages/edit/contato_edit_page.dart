@@ -15,13 +15,14 @@ class ContatoEditPage extends StatefulWidget {
 
 class _ContatoEditPageState
     extends ModularState<ContatoEditPage, ContatoEditController> {
+  
+  @override
+  void initState() {
+    if (widget.id != null) controller.load(int.parse(widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    if(widget.id != null){
-      controller.load(int.parse(widget.id));
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -51,7 +52,7 @@ class _ContatoEditPageState
                 icon: Icons.alternate_email),
             SizedBox(height: 16.0),
             RaisedButton(
-              onPressed: ()=> controller.salvar(),
+              onPressed: () => controller.salvar(),
               child: Text("Salvar"),
             ),
           ],
