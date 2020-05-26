@@ -36,9 +36,9 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
   salvar() async {
     ContatoModel contato = ContatoModel(
       id: _id,
-      nome: modelView.nome,
-      telefone: modelView.telefone,
-      email: modelView.email,
+      nome: nomeController.text,
+      telefone: telefoneController.text,
+      email: emailController.text,
     );
     if(this._id == null){
       await this._insert(contato);
