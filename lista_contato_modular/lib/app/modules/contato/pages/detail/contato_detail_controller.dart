@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lista_contato_modular/app/modules/contato/models/contato_model.dart';
 import 'package:lista_contato_modular/app/modules/contato/services/interfaces/contato.interface.service.dart';
 import 'package:mobx/mobx.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'contato_detail_controller.g.dart';
 
@@ -31,4 +32,8 @@ abstract class _ContatoDetailControllerBase with Store {
     await contatoService.delete(_id);
     Modular.link.pushNamedAndRemoveUntil("/", (route) => false);
   }
+
+  call()=>launch("tel://${model.telefone}");
+
+  sendMail()=> launch("mailto://${model.email}");
 }
