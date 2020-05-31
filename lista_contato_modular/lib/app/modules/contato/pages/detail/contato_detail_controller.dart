@@ -35,5 +35,5 @@ abstract class _ContatoDetailControllerBase with Store {
 
   call()=>launch("tel://${model.telefone}");
 
-  sendMail()=> launch("mailto://${model.email}");
+  sendMail()=> launch("mailto:${model.email}");
 }
