@@ -36,12 +36,12 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
     if (!keyForm.currentState.validate()) {
       validate = true;
     } else {
+      keyForm.currentState.save();
       if (this._id == null) {
         await this._insert(contatoModel);
       } else {
         await this._update(contatoModel);
       }
-      keyForm.currentState.save();
       Modular.link.pushNamedAndRemoveUntil("/", (route) => false);
     }
   }
