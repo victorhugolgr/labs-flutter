@@ -15,10 +15,10 @@ class ContatoEditPage extends StatefulWidget {
 
 class _ContatoEditPageState
     extends ModularState<ContatoEditPage, ContatoEditController> {
-  
   @override
   void initState() {
     if (widget.id != null) controller.load(int.parse(widget.id));
+    super.initState();
   }
 
   @override
@@ -27,35 +27,43 @@ class _ContatoEditPageState
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            TextFieldWidget(
-              labelText: 'Nome',
-              onChanged: controller.modelView.setNome,
-              controller: controller.nomeController,
-              icon: Icons.person,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Form(
+            key: controller.key,
+            autovalidate: controller.validate,
+            child: Column(
+              children: <Widget>[
+                TextFieldWidget(
+                  labelText: 'Nome',
+                  controller: controller.nomeController,
+                  validator: controller.validarNome,
+                  icon: Icons.person,
+                ),
+                SizedBox(height: 16.0),
+                TextFieldWidget(
+                  labelText: 'Telefone',
+                  controller: controller.telefoneController,
+                  validator: controller.validarCelular,
+                  textInputType: TextInputType.phone,
+                  icon: Icons.phone,
+                ),
+                SizedBox(height: 16.0),
+                TextFieldWidget(
+                    labelText: 'E-mail',
+                    validator: controller.validateEmail,
+                    controller: controller.emailController,
+                    textInputType: TextInputType.emailAddress,
+                    icon: Icons.alternate_email),
+                SizedBox(height: 16.0),
+                RaisedButton(
+                  onPressed: () => controller.salvar(),
+                  child: Text("Salvar"),
+                ),
+              ],
             ),
-            SizedBox(height: 16.0),
-            TextFieldWidget(
-              labelText: 'Telefone',
-              onChanged: controller.modelView.setTelefone,
-              controller: controller.telefoneController,
-              icon: Icons.phone,
-            ),
-            SizedBox(height: 16.0),
-            TextFieldWidget(
-                labelText: 'E-mail',
-                onChanged: controller.modelView.setEmail,
-                controller: controller.emailController,
-                icon: Icons.alternate_email),
-            SizedBox(height: 16.0),
-            RaisedButton(
-              onPressed: () => controller.salvar(),
-              child: Text("Salvar"),
-            ),
-          ],
+          ),
         ),
       ),
     );

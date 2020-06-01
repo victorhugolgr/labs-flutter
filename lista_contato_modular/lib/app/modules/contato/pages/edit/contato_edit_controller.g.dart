@@ -9,25 +9,32 @@ part of 'contato_edit_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ContatoEditController on _ContatoEditControllerBase, Store {
-  final _$modelViewAtom = Atom(name: '_ContatoEditControllerBase.modelView');
+  final _$validateAtom = Atom(name: '_ContatoEditControllerBase.validate');
 
   @override
-  ContatoModelView get modelView {
-    _$modelViewAtom.reportRead();
-    return super.modelView;
+  bool get validate {
+    _$validateAtom.reportRead();
+    return super.validate;
   }
 
   @override
-  set modelView(ContatoModelView value) {
-    _$modelViewAtom.reportWrite(value, super.modelView, () {
-      super.modelView = value;
+  set validate(bool value) {
+    _$validateAtom.reportWrite(value, super.validate, () {
+      super.validate = value;
     });
+  }
+
+  final _$salvarAsyncAction = AsyncAction('_ContatoEditControllerBase.salvar');
+
+  @override
+  Future salvar() {
+    return _$salvarAsyncAction.run(() => super.salvar());
   }
 
   @override
   String toString() {
     return '''
-modelView: ${modelView}
+validate: ${validate}
     ''';
   }
 }

@@ -2,10 +2,10 @@ import 'dart:convert';
 
 class ContatoModel {
   final int id;
-  final String nome;
-  final String telefone;
-  final String email;
-  final String imagemPath;
+  String nome;
+  String telefone;
+  String email;
+  String imagemPath;
 
   ContatoModel({
     this.id,
