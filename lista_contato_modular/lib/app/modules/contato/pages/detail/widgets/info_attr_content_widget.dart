@@ -5,7 +5,7 @@ class InfoAttrContentWidget extends StatelessWidget {
   final String text;
   final Function onTap;
 
-  const InfoAttrContentWidget({Key key, this.icon, this.text, this.onTap}) : super(key: key);
+  const InfoAttrContentWidget({Key key, this.icon, this.text = "", this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

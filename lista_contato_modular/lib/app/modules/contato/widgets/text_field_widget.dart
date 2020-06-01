@@ -8,6 +8,7 @@ class TextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType textInputType;
   final String initialValue;
+  final Function(String) onSaved;
 
   const TextFieldWidget({
     this.labelText,
@@ -17,16 +18,16 @@ class TextFieldWidget extends StatelessWidget {
     this.controller,
     this.textInputType = TextInputType.text,
     this.initialValue,
+    this.onSaved
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onChanged,
-      controller: controller,
+      controller: TextEditingController(text: initialValue),
       keyboardType: textInputType,
-      initialValue: initialValue,
-      onSaved: (value)=> debugPrint(value),
+      onSaved: onSaved,
       validator: validator,
       decoration: InputDecoration(
         border: OutlineInputBorder(),

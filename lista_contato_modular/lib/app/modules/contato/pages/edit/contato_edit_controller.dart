@@ -13,11 +13,10 @@ class ContatoEditController = _ContatoEditControllerBase
 abstract class _ContatoEditControllerBase extends Disposable with Store {
   final IContatoService contatoService;
 
-  final TextEditingController nomeController = TextEditingController();
-  final TextEditingController telefoneController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+  final GlobalKey<FormState> keyForm = new GlobalKey();
 
-  final GlobalKey<FormState> key = new GlobalKey();
+  @observable
+  ContatoModel contatoModel = ContatoModel();
 
   @observable
   bool validate = false;
@@ -26,31 +25,23 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
 
   _ContatoEditControllerBase({@required this.contatoService});
 
+  @action
   load(int id) async {
     this._id = id;
-    ContatoModel contato = await contatoService.findById(_id);
-    nomeController.text = contato.nome;
-    telefoneController.text = contato.telefone;
-    emailController.text = contato.email;
+    contatoModel = await contatoService.findById(_id);
   }
 
   @action
   salvar() async {
-    if (!key.currentState.validate()) {
+    if (!keyForm.currentState.validate()) {
       validate = true;
     } else {
-      ContatoModel contato = ContatoModel(
-        id: _id,
-        nome: nomeController.text,
-        telefone: telefoneController.text,
-        email: emailController.text,
-      );
       if (this._id == null) {
-        await this._insert(contato);
+        await this._insert(contatoModel);
       } else {
-        await this._update(contato);
+        await this._update(contatoModel);
       }
-      key.currentState.save();
+      keyForm.currentState.save();
       Modular.link.pushNamedAndRemoveUntil("/", (route) => false);
     }
   }
@@ -62,6 +53,13 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
   _update(ContatoModel contato) async {
     await this.contatoService.update(contato);
   }
+
+  void setNome(String value) => this.contatoModel.nome = value;
+
+  void setTelefone(String value) => this.contatoModel.telefone = value;
+
+  void setEmail(String value) => this.contatoModel.email = value;
+
 
   String validarNome(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
