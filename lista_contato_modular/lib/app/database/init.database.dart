@@ -21,7 +21,7 @@ class DatabaseHelper {
     try {
       String path = join(
           await getDatabasesPath(), DatabaseHelperEnum.getValue(DATABASE.name));
-      //await deleteDatabase(path);
+      await deleteDatabase(path);
       return await openDatabase(path,
           version: DatabaseHelperEnum.getValue(DATABASE.version),
           onCreate: _onCreate,
@@ -44,7 +44,8 @@ class DatabaseHelper {
         nome text,
         telefone text,
         email text,
-        imagemPath text
+        imagemPath text,
+        favorite integer
       );''',
     ];
 

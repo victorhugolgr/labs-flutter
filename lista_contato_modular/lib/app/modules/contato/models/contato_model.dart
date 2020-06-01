@@ -6,14 +6,15 @@ class ContatoModel {
   String telefone;
   String email;
   String imagemPath;
+  bool favorite;
 
-  ContatoModel({
-    this.id,
-    this.nome,
-    this.telefone,
-    this.email,
-    this.imagemPath,
-  });
+  ContatoModel(
+      {this.id,
+      this.nome,
+      this.telefone,
+      this.email,
+      this.imagemPath,
+      this.favorite = false});
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,19 +23,20 @@ class ContatoModel {
       'telefone': telefone,
       'email': email,
       'imagemPath': imagemPath,
+      'favorite': favorite
     };
   }
 
   static ContatoModel fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-  
+
     return ContatoModel(
-      id: map['id'],
-      nome: map['nome'],
-      telefone: map['telefone'],
-      email: map['email'],
-      imagemPath: map['imagemPath'],
-    );
+        id: map['id'],
+        nome: map['nome'],
+        telefone: map['telefone'],
+        email: map['email'],
+        imagemPath: map['imagemPath'],
+        favorite: map['favorite']);
   }
 
   String toJson() => json.encode(toMap());
