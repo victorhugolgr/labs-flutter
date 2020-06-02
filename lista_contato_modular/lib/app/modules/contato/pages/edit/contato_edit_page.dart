@@ -43,7 +43,7 @@ class _ContatoEditPageState
                       validator: controller.validarNome,
                       icon: Icons.person,
                       initialValue: controller.contatoModel.nome,
-                      onSaved: controller.setNome,
+                      onChanged: controller.setNome,
                     );
                   }),
                   SizedBox(height: 16.0),
@@ -53,7 +53,7 @@ class _ContatoEditPageState
                       validator: controller.validarCelular,
                       textInputType: TextInputType.phone,
                       initialValue: controller.contatoModel.telefone,
-                      onSaved: controller.setTelefone,
+                      onChanged: controller.setTelefone,
                       icon: Icons.phone,
                     );
                   }),
@@ -64,7 +64,7 @@ class _ContatoEditPageState
                         validator: controller.validateEmail,
                         textInputType: TextInputType.emailAddress,
                         initialValue: controller.contatoModel.email,
-                        onSaved: controller.setEmail,
+                        onChanged: controller.setEmail,
                         icon: Icons.alternate_email);
                   }),
                   SizedBox(height: 16.0),
