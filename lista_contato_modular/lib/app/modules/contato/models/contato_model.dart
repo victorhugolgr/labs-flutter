@@ -16,6 +16,17 @@ class ContatoModel {
       this.imagemPath,
       this.favorite = false});
 
+  copyWith({String nome, String telefone, String email, String imagemPath, bool favorite}){
+    return ContatoModel(
+      id: this.id,
+      nome: nome ?? this.nome, 
+      telefone: telefone ?? this.telefone,
+      email: email ?? this.email,
+      imagemPath: imagemPath ?? this.imagemPath,
+      favorite: favorite ?? this.favorite
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -36,7 +47,7 @@ class ContatoModel {
         telefone: map['telefone'],
         email: map['email'],
         imagemPath: map['imagemPath'],
-        favorite: map['favorite']);
+        favorite: map['favorite'] == 1);
   }
 
   String toJson() => json.encode(toMap());

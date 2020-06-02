@@ -36,4 +36,10 @@ abstract class _ContatoDetailControllerBase with Store {
   call()=>launch("tel://${model.telefone}");
 
   sendMail()=> launch("mailto:${model.email}");
+
+  @action
+  setFavorite() async {
+    model = model.copyWith(favorite: !model.favorite);
+    await contatoService.update(model);
+  }
 }

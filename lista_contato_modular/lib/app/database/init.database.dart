@@ -45,7 +45,7 @@ class DatabaseHelper {
         telefone text,
         email text,
         imagemPath text,
-        favorite integer
+        favorite BOOLEAN NOT NULL CHECK (favorite IN (0,1))
       );''',
     ];
 

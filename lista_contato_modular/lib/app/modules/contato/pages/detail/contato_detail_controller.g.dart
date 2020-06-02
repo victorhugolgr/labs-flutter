@@ -31,6 +31,14 @@ mixin _$ContatoDetailController on _ContatoDetailControllerBase, Store {
     return _$loadAsyncAction.run(() => super.load(id));
   }
 
+  final _$setFavoriteAsyncAction =
+      AsyncAction('_ContatoDetailControllerBase.setFavorite');
+
+  @override
+  Future setFavorite() {
+    return _$setFavoriteAsyncAction.run(() => super.setFavorite());
+  }
+
   @override
   String toString() {
     return '''

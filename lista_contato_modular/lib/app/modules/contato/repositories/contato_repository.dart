@@ -39,6 +39,7 @@ class ContatoRepository extends Disposable implements IContatoRepository {
           telefone: category[i]['telefone'],
           email: category[i]['email'],
           imagemPath: category[i]['imagemPath'],
+          favorite: category[i]['favorite'] == 1
         );
       });
     } catch (error) {
@@ -89,7 +90,7 @@ class ContatoRepository extends Disposable implements IContatoRepository {
     final Database db = await _database();
     try {
       List<Map<String, dynamic>> maps = await db.query("$_table",
-          columns: ["id", "nome", "telefone", "email", "imagemPath"],
+          columns: ["id", "nome", "telefone", "email", "imagemPath", "favorite"],
           where: 'id = ?',
           whereArgs: [id]);
 

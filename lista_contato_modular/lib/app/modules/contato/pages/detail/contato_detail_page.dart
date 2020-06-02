@@ -39,8 +39,8 @@ class _ContatoDetailPageState
               children: <Widget>[
                 IconButtonWidget(
                     text: 'Favoritar',
-                    icon: Icons.favorite_border,
-                    onTap: () {}),
+                    icon: controller.model.favorite ? Icons.favorite : Icons.favorite_border,
+                    onTap: () => controller.setFavorite()),
                 IconButtonWidget(
                     text: 'Editar',
                     icon: Icons.edit,
