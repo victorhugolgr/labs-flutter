@@ -38,7 +38,13 @@ class ContatoService extends Disposable implements IContatoService {
     return await contatoRepository.queryRowCount();
   }
 
+  @override
+  Future<List<ContatoModel>> findAllFavorites() async {
+    return await contatoRepository.findAllFavorites();
+  }
+  
   //dispose will be called automatically
   @override
   void dispose() {}
+
 }

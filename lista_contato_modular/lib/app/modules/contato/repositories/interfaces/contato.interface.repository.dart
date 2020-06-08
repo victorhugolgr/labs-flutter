@@ -7,4 +7,5 @@ abstract class IContatoRepository {
   Future<int> update(ContatoModel row);
   Future<int> delete(id);
   Future<ContatoModel> findById(id);
+  Future<List<ContatoModel>> findAllFavorites();
 }

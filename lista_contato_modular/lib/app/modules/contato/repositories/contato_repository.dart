@@ -107,4 +107,26 @@ class ContatoRepository extends Disposable implements IContatoRepository {
   //dispose will be called automatically
   @override
   void dispose() {}
+
+  @override
+  Future<List<ContatoModel>> findAllFavorites() async {
+    final Database db = await _database();
+    try {
+      final category = await db.query(_table, where: "favorite = 1");
+
+      return List.generate(category.length, (i) {
+        return ContatoModel(
+          id: category[i]['id'],
+          nome: category[i]['nome'],
+          telefone: category[i]['telefone'],
+          email: category[i]['email'],
+          imagemPath: category[i]['imagemPath'],
+          favorite: category[i]['favorite'] == 1
+        );
+      });
+    } catch (error) {
+      print(error);
+    }
+    return null;
+  }
 }
