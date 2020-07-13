@@ -26,7 +26,7 @@ class _TopContentWidgetState extends State<TopContentWidget> {
             height: MediaQuery.of(context).size.height * 0.5,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/batman_profile.png"),
+                image: AssetImage("images/default_user.png"),
                 fit: BoxFit.cover,
               ),
             ),

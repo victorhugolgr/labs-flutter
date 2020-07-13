@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lista_contato_modular/app/modules/contato/models/contato_model.dart';
@@ -14,14 +16,15 @@ class ItemWidget extends StatelessWidget {
       child: Observer(
         builder: (_) {
           return ListTile(
-              onTap: onPressed,
-              title: Text(model.nome),
-              subtitle: Text(model.email),
-              leading: CircleAvatar(
-                child: model.imagemPath != null
-                    ? AssetImage("images/batman_profile.png")
-                    : Text(model.nome.substring(0, 1)),
-              ));
+            onTap: onPressed,
+            title: Text(model.nome),
+            subtitle: Text(model.email),
+            leading: CircleAvatar(
+              child: model.imagemPath != null
+                  ? Image.file(File(model.imagemPath))
+                  : Text(model.nome.substring(0, 1)),
+            ),
+          );
         },
       ),
     );

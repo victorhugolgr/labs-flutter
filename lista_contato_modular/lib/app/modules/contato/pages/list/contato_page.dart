@@ -60,7 +60,7 @@ class _ContatoPageState extends ModularState<ContatoPage, ContatoController> {
                                     child: Container(
                                       child: CircleAvatar(
                                         backgroundImage: AssetImage(
-                                            "images/batman_profile.png"),
+                                            "images/default_user.png"),
                                       ),
                                     ),
                                   ),
