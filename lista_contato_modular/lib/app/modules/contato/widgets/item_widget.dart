@@ -14,14 +14,14 @@ class ItemWidget extends StatelessWidget {
       child: Observer(
         builder: (_) {
           return ListTile(
-            onTap: onPressed,
-            title: Text(model.nome),
-            subtitle: Text(model.email),
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: CircleAvatar(backgroundImage: AssetImage("images/batman_profile.png"),),
-            ),
-          );
+              onTap: onPressed,
+              title: Text(model.nome),
+              subtitle: Text(model.email),
+              leading: CircleAvatar(
+                child: model.imagemPath != null
+                    ? AssetImage("images/batman_profile.png")
+                    : Text(model.nome.substring(0, 1)),
+              ));
         },
       ),
     );
