@@ -79,8 +79,8 @@ mixin _$ContatoEditController on _ContatoEditControllerBase, Store {
       AsyncAction('_ContatoEditControllerBase.takePicture');
 
   @override
-  Future takePicture() {
-    return _$takePictureAsyncAction.run(() => super.takePicture());
+  Future takePicture(ImageSource sourse) {
+    return _$takePictureAsyncAction.run(() => super.takePicture(sourse));
   }
 
   @override

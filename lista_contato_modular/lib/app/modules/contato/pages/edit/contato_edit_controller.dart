@@ -18,6 +18,7 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
   final IContatoService contatoService;
 
   final GlobalKey<FormState> keyForm = new GlobalKey();
+  
 
   File _image;
 
@@ -115,12 +116,13 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
   }
 
   @action
-  takePicture() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+  takePicture(ImageSource sourse) async {
+    final pickedFile = await picker.getImage(source: sourse);
     if (pickedFile != null) {
       _image = File(pickedFile.path);
       contatoModel = contatoModel.copyWith(imagemPath: pickedFile.path);
     }
+    Modular.link.pop();
   }
 
   @override

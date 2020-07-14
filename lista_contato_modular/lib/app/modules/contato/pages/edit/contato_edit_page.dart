@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/edit/contato_edit_controller.dart';
+import 'package:lista_contato_modular/app/modules/contato/pages/edit/widgets/setting_modal_bottom_sheet_widget.dart';
 import 'package:lista_contato_modular/app/modules/contato/widgets/text_field_widget.dart';
 
 class ContatoEditPage extends StatefulWidget {
@@ -42,11 +44,13 @@ class _ContatoEditPageState
                   Observer(
                     builder: (_) {
                       return GestureDetector(
-                        onTap: controller.takePicture,
+                        onTap: () => _display(_),
                         child: CircleAvatar(
-                          backgroundImage: controller.contatoModel.imagemPath != null
-                              ? FileImage(File(controller.contatoModel.imagemPath))
-                              : AssetImage("images/default_user.png"),
+                          backgroundImage:
+                              controller.contatoModel.imagemPath != null
+                                  ? FileImage(
+                                      File(controller.contatoModel.imagemPath))
+                                  : AssetImage("images/default_user.png"),
                           radius: 60.0,
                         ),
                       );
@@ -99,5 +103,14 @@ class _ContatoEditPageState
         ),
       ),
     );
+  }
+
+  _display(BuildContext context) {
+    Scaffold.of(context).showBottomSheet<void>((BuildContext context) {
+      return SettingModelBottomSheetWidget(
+        onTapCamera: () => controller.takePicture(ImageSource.camera),
+        onTapGaleria: () => controller.takePicture(ImageSource.gallery),
+      );
+    });
   }
 }
