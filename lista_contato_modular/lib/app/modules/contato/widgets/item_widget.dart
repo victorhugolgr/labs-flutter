@@ -19,10 +19,15 @@ class ItemWidget extends StatelessWidget {
             onTap: onPressed,
             title: Text(model.nome),
             subtitle: Text(model.email),
-            leading: CircleAvatar(
-              child: model.imagemPath != null
-                  ? Image.file(File(model.imagemPath))
-                  : Text(model.nome.substring(0, 1)),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: CircleAvatar(
+                child: model.imagemPath != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.file(File(model.imagemPath)))
+                    : Text(model.nome.substring(0, 1)),
+              ),
             ),
           );
         },

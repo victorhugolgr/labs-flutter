@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lista_contato_modular/app/modules/contato/models/contato_model.dart';
 import 'package:lista_contato_modular/app/modules/contato/services/interfaces/contato.interface.service.dart';
 import 'package:mobx/mobx.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as pPath;
 part 'contato_edit_controller.g.dart';
 
 class ContatoEditController = _ContatoEditControllerBase
@@ -15,6 +19,8 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
 
   final GlobalKey<FormState> keyForm = new GlobalKey();
 
+  File _image;
+
   @observable
   ContatoModel contatoModel = ContatoModel();
 
@@ -23,7 +29,18 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
 
   int _id;
 
+  final picker = ImagePicker();
+
   _ContatoEditControllerBase({@required this.contatoService});
+
+  @computed
+  String get urlImage => this.contatoModel.imagemPath;
+
+  @computed
+  File get image => _image;
+
+  @computed
+  get sizeImage => _image?.path ?? "Não definido";
 
   @action
   load(int id) async {
@@ -60,7 +77,6 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
 
   void setEmail(String value) => this.contatoModel.email = value;
 
-
   String validarNome(String value) {
     String patttern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(patttern);
@@ -77,9 +93,9 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
     RegExp regExp = new RegExp(patttern);
     if (value.length == 0) {
       return "Informe o celular";
-    } else if(value.length != 10){
+    } else if (value.length != 10) {
       return "O celular deve ter 10 dígitos";
-    }else if (!regExp.hasMatch(value)) {
+    } else if (!regExp.hasMatch(value)) {
       return "O número do celular so deve conter dígitos";
     }
     return null;
@@ -95,6 +111,15 @@ abstract class _ContatoEditControllerBase extends Disposable with Store {
       return "Email inválido";
     } else {
       return null;
+    }
+  }
+
+  @action
+  takePicture() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      contatoModel = contatoModel.copyWith(imagemPath: pickedFile.path);
     }
   }
 

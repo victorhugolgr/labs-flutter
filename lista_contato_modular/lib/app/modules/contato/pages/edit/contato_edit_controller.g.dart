@@ -9,6 +9,27 @@ part of 'contato_edit_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ContatoEditController on _ContatoEditControllerBase, Store {
+  Computed<String> _$urlImageComputed;
+
+  @override
+  String get urlImage =>
+      (_$urlImageComputed ??= Computed<String>(() => super.urlImage,
+              name: '_ContatoEditControllerBase.urlImage'))
+          .value;
+  Computed<File> _$imageComputed;
+
+  @override
+  File get image => (_$imageComputed ??= Computed<File>(() => super.image,
+          name: '_ContatoEditControllerBase.image'))
+      .value;
+  Computed<dynamic> _$sizeImageComputed;
+
+  @override
+  dynamic get sizeImage =>
+      (_$sizeImageComputed ??= Computed<dynamic>(() => super.sizeImage,
+              name: '_ContatoEditControllerBase.sizeImage'))
+          .value;
+
   final _$contatoModelAtom =
       Atom(name: '_ContatoEditControllerBase.contatoModel');
 
@@ -54,11 +75,22 @@ mixin _$ContatoEditController on _ContatoEditControllerBase, Store {
     return _$salvarAsyncAction.run(() => super.salvar());
   }
 
+  final _$takePictureAsyncAction =
+      AsyncAction('_ContatoEditControllerBase.takePicture');
+
+  @override
+  Future takePicture() {
+    return _$takePictureAsyncAction.run(() => super.takePicture());
+  }
+
   @override
   String toString() {
     return '''
 contatoModel: ${contatoModel},
-validate: ${validate}
+validate: ${validate},
+urlImage: ${urlImage},
+image: ${image},
+sizeImage: ${sizeImage}
     ''';
   }
 }

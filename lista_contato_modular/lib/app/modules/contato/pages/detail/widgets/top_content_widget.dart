@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:lista_contato_modular/app/modules/contato/models/contato_model.dart';
@@ -26,7 +28,9 @@ class _TopContentWidgetState extends State<TopContentWidget> {
             height: MediaQuery.of(context).size.height * 0.5,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/default_user.png"),
+                image: widget.contato.imagemPath != null
+                    ? FileImage(File(widget.contato.imagemPath))
+                    : AssetImage("images/default_user.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -41,7 +45,7 @@ class _TopContentWidgetState extends State<TopContentWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Text(
-                    widget.contato?.nome,
+                    widget.contato.nome??"",
                     style: TextStyle(color: Colors.white, fontSize: 45.0),
                   ),
                 ],

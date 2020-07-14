@@ -20,7 +20,7 @@ class InfoAttrContentWidget extends StatelessWidget {
                   width: 16.0,
                 ),
                 Text(
-                  text,
+                  text??"",
                   style: TextStyle(fontSize: 18.0),
                 ),
               ],

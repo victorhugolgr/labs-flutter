@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -37,6 +39,22 @@ class _ContatoEditPageState
               autovalidate: controller.validate,
               child: Column(
                 children: <Widget>[
+                  Observer(
+                    builder: (_) {
+                      return GestureDetector(
+                        onTap: controller.takePicture,
+                        child: CircleAvatar(
+                          backgroundImage: controller.contatoModel.imagemPath != null
+                              ? FileImage(File(controller.contatoModel.imagemPath))
+                              : AssetImage("images/default_user.png"),
+                          radius: 60.0,
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   Observer(builder: (_) {
                     return TextFieldWidget(
                       labelText: 'Nome',
