@@ -1,7 +1,9 @@
+import 'package:lista_contato_modular/app/modules/contato/pages/home/home_controller.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/detail/contato_detail_controller.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/detail/contato_detail_page.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/edit/contato_edit_controller.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/edit/contato_edit_page.dart';
+import 'package:lista_contato_modular/app/modules/contato/pages/home/home_page.dart';
 import 'package:lista_contato_modular/app/modules/contato/repositories/contato_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/list/contato_controller.dart';
@@ -13,7 +15,9 @@ import 'package:lista_contato_modular/app/modules/contato/services/interfaces/co
 class ContatoModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => ContatoDetailController(contatoService: i.get<IContatoService>())),
+        Bind((i) => HomeController()),
+        Bind((i) =>
+            ContatoDetailController(contatoService: i.get<IContatoService>())),
         Bind<IContatoRepository>((i) => ContatoRepository()),
         Bind<IContatoService>(
             (i) => ContatoService(contatoRepository: i.get())),
@@ -27,7 +31,7 @@ class ContatoModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => ContatoPage()),
+        Router(Modular.initialRoute, child: (_, args) => HomePage()),
         Router("/edit/:id",
             child: (_, args) => ContatoEditPage(id: args.params['id'])),
         Router("/edit", child: (_, args) => ContatoEditPage()),

@@ -21,12 +21,6 @@ class _ContatoPageState extends ModularState<ContatoPage, ContatoController> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            Modular.link.pushNamed('/edit');
-          },
-        ),
         body: Column(
           children: <Widget>[
             Observer(builder: (_) {
