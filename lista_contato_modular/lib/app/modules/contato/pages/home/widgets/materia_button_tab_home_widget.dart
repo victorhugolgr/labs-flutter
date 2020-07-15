@@ -36,14 +36,14 @@ class _MaterialButtonTabHomeWidgetState
             Icon(
               widget.icon,
               color: widget.currentTab == widget.indexTab
-                  ? Colors.blue
+                  ? Theme.of(context).accentColor
                   : Colors.grey,
             ),
             Text(
               widget.title,
               style: TextStyle(
                 color: widget.currentTab == widget.indexTab
-                    ? Colors.blue
+                    ? Theme.of(context).accentColor
                     : Colors.grey,
               ),
             ),

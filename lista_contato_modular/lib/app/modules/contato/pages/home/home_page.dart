@@ -39,43 +39,56 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Observer(builder: (_) {
-                return MaterialButtonTabHomeWidget(
-                  currentTab: controller.currentTab,
-                  title: "Contatos",
-                  icon: Icons.list,
-                  onPressed: () => controller.setCurrentTab(ContatoPage(), 0),
-                  indexTab: 0,
-                );
-              }),
-              Observer(builder: (_) {
-                return MaterialButtonTabHomeWidget(
-                  currentTab: controller.currentTab,
-                  title: "Favoritos",
-                  icon: Icons.favorite,
-                  onPressed: () => controller.setCurrentTab(ContatoPage(), 1),
-                  indexTab: 1,
-                );
-              }),
-              Observer(builder: (_) {
-                return MaterialButtonTabHomeWidget(
-                  currentTab: controller.currentTab,
-                  title: "Pesquisa",
-                  icon: Icons.search,
-                  onPressed: () => controller.setCurrentTab(ContatoPage(), 2),
-                  indexTab: 2,
-                );
-              }),
-              Observer(builder: (_) {
-                return MaterialButtonTabHomeWidget(
-                  currentTab: controller.currentTab,
-                  title: "Mapa",
-                  icon: Icons.place,
-                  onPressed: () =>
-                      controller.setCurrentTab(ContatoEditPage(), 3),
-                  indexTab: 3,
-                );
-              }),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Observer(builder: (_) {
+                    return MaterialButtonTabHomeWidget(
+                      currentTab: controller.currentTab,
+                      title: "Contatos",
+                      icon: Icons.list,
+                      onPressed: () =>
+                          controller.setCurrentTab(ContatoPage(), 0),
+                      indexTab: 0,
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return MaterialButtonTabHomeWidget(
+                      currentTab: controller.currentTab,
+                      title: "Favoritos",
+                      icon: Icons.favorite,
+                      onPressed: () =>
+                          controller.setCurrentTab(ContatoPage(), 1),
+                      indexTab: 1,
+                    );
+                  }),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Observer(builder: (_) {
+                    return MaterialButtonTabHomeWidget(
+                      currentTab: controller.currentTab,
+                      title: "Pesquisa",
+                      icon: Icons.search,
+                      onPressed: () =>
+                          controller.setCurrentTab(ContatoPage(), 2),
+                      indexTab: 2,
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return MaterialButtonTabHomeWidget(
+                      currentTab: controller.currentTab,
+                      title: "Mapa",
+                      icon: Icons.place,
+                      onPressed: () =>
+                          controller.setCurrentTab(ContatoEditPage(), 3),
+                      indexTab: 3,
+                    );
+                  }),
+                ],
+              ),
             ],
           ),
         ),
