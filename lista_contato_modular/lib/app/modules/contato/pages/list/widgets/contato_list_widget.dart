@@ -31,20 +31,15 @@ class ContatoListWidget extends StatelessWidget {
           );
         }
 
-        return Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            child: ListView.builder(
-              itemCount: contatos.value.length,
-              itemBuilder: (_, index) {
-                return ItemWidget(
-                  model: contatos.value[index],
-                  onPressed: () => Modular.link.pushNamed(
-                      '/detail/' + contatos.value[index].id.toString()),
-                );
-              },
-            ),
-          ),
+        return ListView.builder(
+          itemCount: contatos.value.length,
+          itemBuilder: (_, index) {
+            return ItemWidget(
+              model: contatos.value[index],
+              onPressed: () => Modular.link
+                  .pushNamed('/detail/' + contatos.value[index].id.toString()),
+            );
+          },
         );
       },
     );
