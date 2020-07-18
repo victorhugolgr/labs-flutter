@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/edit/contato_edit_page.dart';
+import 'package:lista_contato_modular/app/modules/contato/pages/favorite/favorite_page.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/home/home_controller.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/home/widgets/materia_button_tab_home_widget.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/list/contato_page.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                       title: "Favoritos",
                       icon: Icons.favorite,
                       onPressed: () =>
-                          controller.setCurrentTab(ContatoPage(), 1),
+                          controller.setCurrentTab(FavoritePage(), 1),
                       indexTab: 1,
                     );
                   }),

@@ -1,3 +1,4 @@
+import 'package:lista_contato_modular/app/modules/contato/pages/favorite/favorite_controller.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/home/home_controller.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/detail/contato_detail_controller.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/detail/contato_detail_page.dart';
@@ -7,7 +8,6 @@ import 'package:lista_contato_modular/app/modules/contato/pages/home/home_page.d
 import 'package:lista_contato_modular/app/modules/contato/repositories/contato_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lista_contato_modular/app/modules/contato/pages/list/contato_controller.dart';
-import 'package:lista_contato_modular/app/modules/contato/pages/list/contato_page.dart';
 import 'package:lista_contato_modular/app/modules/contato/repositories/interfaces/contato.interface.repository.dart';
 import 'package:lista_contato_modular/app/modules/contato/services/contato_service.dart';
 import 'package:lista_contato_modular/app/modules/contato/services/interfaces/contato.interface.service.dart';
@@ -15,6 +15,7 @@ import 'package:lista_contato_modular/app/modules/contato/services/interfaces/co
 class ContatoModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => FavoriteController(contatoService: i.get())),
         Bind((i) => HomeController()),
         Bind((i) =>
             ContatoDetailController(contatoService: i.get<IContatoService>())),

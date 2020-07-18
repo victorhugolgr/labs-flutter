@@ -15,13 +15,9 @@ class ContatoPage extends StatefulWidget {
 class _ContatoPageState extends ModularState<ContatoPage, ContatoController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: ContatoListWidget(
+    return ContatoListWidget(
           contatos: controller.contatos,
           onErro: controller.loadList(),
-        ));
+        );
   }
 }
